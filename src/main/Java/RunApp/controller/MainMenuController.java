@@ -26,7 +26,7 @@ public class MainMenuController {
 
     }
 
-    private Stage getCurrentStage() {
+    private Stage currentStage() {
         return (Stage) mainPane.getScene().getWindow();
     }
 
@@ -43,6 +43,6 @@ public class MainMenuController {
     @FXML
     public void exitAction() {
         System.out.println("Exit button clicked");
-        getCurrentStage().close();
+        currentStage().close();
     }
 }
