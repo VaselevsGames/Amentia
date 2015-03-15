@@ -23,6 +23,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
+        <module name="Amentia. history Throat" />
         <module name="Аменция. История горла" />
       </profile>
     </annotationProcessing>
