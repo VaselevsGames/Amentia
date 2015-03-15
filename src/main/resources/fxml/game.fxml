@@ -1,20 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.control.*?>
-<?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="360.0" prefWidth="515.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-      <ImageView fitHeight="406.0" fitWidth="515.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@Content/MainMenu.jpg" />
-         </image>
-      </ImageView>
-      <Button cancelButton="true" layoutX="339.0" layoutY="180.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="122.0" text="Выход" textAlignment="CENTER" />
-      <Button layoutX="339.0" layoutY="121.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="122.0" text="Об авторах" textAlignment="CENTER" />
-      <Button defaultButton="true" layoutX="339.0" layoutY="64.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="122.0" text="Начать игру" textAlignment="CENTER" />
-   </children>
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="360.0"
+      prefWidth="515.0" xmlns="http://javafx.com/javafx/8">
+    <ImageView fitHeight="406.0" fitWidth="515.0" pickOnBounds="true" preserveRatio="true">
+        <Image url="@Content/MainMenu.jpg"/>
+    </ImageView>
+    <Button cancelButton="true" layoutX="340.0" layoutY="218.0" mnemonicParsing="false" prefHeight="25.0"
+            prefWidth="122.0" text="Выход" textAlignment="CENTER"/>
+    <Button layoutX="340.0" layoutY="159.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="122.0"
+            text="Об авторах" textAlignment="CENTER"/>
+    <Button defaultButton="true" layoutX="340.0" layoutY="102.0" mnemonicParsing="false" prefHeight="25.0"
+            prefWidth="122.0" text="Начать игру" textAlignment="CENTER"/>
+    <Text layoutX="7.0" layoutY="350.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Version 0.0.1">
+        <font>
+          <Font name="Constantia" size="9.0"/>
+        </font>
+    </Text>
+    <Text fill="WHITE" layoutX="313.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0"
+          text="Аменция: История Горла" textAlignment="CENTER" wrappingWidth="177.47265625">
+        <font>
+          <Font name="Constantia Italic" size="15.0"/>
+        </font>
+    </Text>
 </Pane>
