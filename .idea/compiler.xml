@@ -24,6 +24,7 @@
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
         <module name="Amentia. history Throat" />
+        <module name="Amentia. History Throat" />
         <module name="Аменция. История горла" />
       </profile>
     </annotationProcessing>
