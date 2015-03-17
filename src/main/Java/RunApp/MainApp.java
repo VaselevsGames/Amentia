@@ -1,9 +1,5 @@
 package RunApp;
 
-/**
- * Created by TaInt on 15.03.2015.
- */
-
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -19,9 +15,9 @@ public class MainApp extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         String fxmlFile = "/fxml/game.fxml";
-        FXMLLoader loader = new FXMLLoader();
-        Parent root = loader.load(getClass().getResource(fxmlFile));
-        stage.setTitle("Аменция: История Горла");
+        new FXMLLoader();
+        Parent root = FXMLLoader.load(getClass().getResource(fxmlFile));
+        stage.setTitle("Amentia: history Throat");
         stage.setScene(new Scene(root));
         stage.setResizable(false);
         stage.show();
