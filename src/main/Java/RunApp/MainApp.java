@@ -21,7 +21,7 @@ public class MainApp extends Application {
         String fxmlFile = "/fxml/game.fxml";
         FXMLLoader loader = new FXMLLoader();
         Parent root = loader.load(getClass().getResource(fxmlFile));
-        stage.setTitle("JavaFX and Maven");
+        stage.setTitle("Аменция: История Горла");
         stage.setScene(new Scene(root));
         stage.setResizable(false);
         stage.show();

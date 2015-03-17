@@ -16,7 +16,7 @@
        <Button fx:id="btn_exit" cancelButton="true" layoutX="340.0" layoutY="218.0" mnemonicParsing="false" onAction="#exitAction" prefHeight="25.0" prefWidth="122.0" text="Выход" textAlignment="CENTER" />
        <Button fx:id="btn_about" layoutX="340.0" layoutY="159.0" mnemonicParsing="false" onAction="#aboutAction" prefHeight="25.0" prefWidth="122.0" text="Об авторах" textAlignment="CENTER" />
        <Button fx:id="btn_startGame" defaultButton="true" layoutX="340.0" layoutY="102.0" mnemonicParsing="false" onAction="#startGameAction" prefHeight="25.0" prefWidth="122.0" text="Начать игру" textAlignment="CENTER" />
-       <Text layoutX="7.0" layoutY="350.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Version 0.0.1">
+       <Text layoutX="7.0" layoutY="350.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Version 0.0.2">
            <font>
              <Font name="Constantia" size="9.0" />
            </font>
