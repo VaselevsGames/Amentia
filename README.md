@@ -1,5 +1,5 @@
 #Amentia. History Throat
-#Version: 0.0.1
+#Version: 0.0.2
 
 #Team: VaselevsGames
-Members: DarkoreXOR, ilyushamolodec, maskbor, MorozovArtem, NstTaInt
+Members: DarkoreXOR, MorozovArtem, NstTaInt
