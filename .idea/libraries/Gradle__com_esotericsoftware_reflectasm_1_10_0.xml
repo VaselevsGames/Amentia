@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: com.esotericsoftware:reflectasm:1.10.0">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.esotericsoftware/reflectasm/1.10.0/ee6b6011be370e49d916ab86abb95d93015e84f0/reflectasm-1.10.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.esotericsoftware/reflectasm/1.10.0/914c8a15752ee93fcb69976d8b63227fc78aef3b/reflectasm-1.10.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
