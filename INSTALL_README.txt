@@ -1,6 +1,6 @@
-[IntelliJ IDEA]
+п»ї[IntelliJ IDEA]
 ### Run/Debug Configurations
 Main class: ru.vaselevs.amentia.desktop.DesktopLauncher
 
-Для запуска в IDEA важно указать следующее:
+Р”Р»СЏ Р·Р°РїСѓСЃРєР° РІ IDEA РІР°Р¶РЅРѕ СѓРєР°Р·Р°С‚СЊ СЃР»РµРґСѓСЋС‰РµРµ:
 Working directory: $MODULE_DIR$\..\core\assets
