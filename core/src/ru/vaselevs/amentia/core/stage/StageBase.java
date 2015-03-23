@@ -11,7 +11,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 /**
  * Created by CoreX on 22.03.2015.
  */
-public class BaseStage {
+public class StageBase {
 
     private Stage stage;
     private SpriteBatch batch;
@@ -19,7 +19,7 @@ public class BaseStage {
 
     private StageManager stageManager;
 
-    protected BaseStage( StageManager stageManager ) {
+    protected StageBase(StageManager stageManager) {
         this.stage = new Stage();
         this.batch = new SpriteBatch();
         this.updateInput();
