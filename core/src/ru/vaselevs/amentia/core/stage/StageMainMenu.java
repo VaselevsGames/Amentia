@@ -1,26 +1,22 @@
 package ru.vaselevs.amentia.core.stage;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.GL30;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import ru.vaselevs.amentia.core.font.Font;
 import ru.vaselevs.amentia.core.game.GameConstants;
+import ru.vaselevs.amentia.core.image.BackgroundImage;
+import ru.vaselevs.amentia.core.resource.ResourceDisposer;
 
 /**
  * Created by CoreX on 22.03.2015.
  */
 
-public class StageMainMenu extends BaseStage {
-    SpriteBatch batch;
-    Stage stage;
+public class StageMainMenu extends StageBase {
     Skin uiSkin;
 
     // font
@@ -31,7 +27,9 @@ public class StageMainMenu extends BaseStage {
     private BitmapFont labelFont;
 
     // textures
-    Texture backgroundTexture;
+    private BackgroundImage backgroundImage;
+
+    private ResourceDisposer resourceDisposer;
 
     // buttons
     TextButton buttonStartGame;
@@ -41,15 +39,18 @@ public class StageMainMenu extends BaseStage {
 
     public StageMainMenu(StageManager stageManager) {
         super(stageManager);
-        this.stage = getStage();
-        this.batch = getBatch();
+        resourceDisposer = new ResourceDisposer();
+
+        // add resources to disposer
+        resourceDisposer.addResource(getStage());
+        resourceDisposer.addResource(getBatch());
 
         this.loadBackground();
         this.loadUISkin();
         this.initializeButtonFont();
         this.initializeLabelFont();
 
-        Gdx.input.setInputProcessor(stage);
+        Gdx.input.setInputProcessor(getStage());
         this.createGameTittle();
         this.createButtons();
     }
@@ -59,16 +60,13 @@ public class StageMainMenu extends BaseStage {
         float x = Gdx.graphics.getWidth() - gameTitle.getWidth() - 45;
         float y = Gdx.graphics.getHeight() - 50;
         this.gameTitle.setPosition(x, y);
-        this.stage.addActor(this.gameTitle);
+        this.getStage().addActor(this.gameTitle);
     }
 
     private void createButtons() {
-        this.buttonStartGame = this.makeStartGameButton();
-        this.buttonAbout = this.makeAboutButton();
-        this.buttonExitGame = this.makeExitGameButton();
-        this.stage.addActor(this.buttonStartGame);
-        this.stage.addActor(this.buttonAbout);
-        this.stage.addActor(this.buttonExitGame);
+        this.getStage().addActor(this.buttonStartGame = this.makeStartGameButton());
+        this.getStage().addActor(this.buttonAbout = this.makeAboutButton());
+        this.getStage().addActor(this.buttonExitGame = this.makeExitGameButton());
     }
 
     private void initializeButtonFont() {
@@ -76,6 +74,9 @@ public class StageMainMenu extends BaseStage {
         this.buttonFont = font_captureIt.generateFont(18);
         TextButton.TextButtonStyle style = this.uiSkin.get("default", TextButton.TextButtonStyle.class);
         style.font = this.buttonFont;
+        // add resources to disposer
+        resourceDisposer.addResource(this.font_captureIt);
+        resourceDisposer.addResource(this.buttonFont);
     }
 
     private void initializeLabelFont() {
@@ -83,14 +84,21 @@ public class StageMainMenu extends BaseStage {
         this.labelFont = font_malahit.generateFont(24);
         Label.LabelStyle style = this.uiSkin.get("title", Label.LabelStyle.class);
         style.font = this.labelFont;
+        // add resources to disposer
+        resourceDisposer.addResource(this.font_malahit);
+        resourceDisposer.addResource(this.labelFont);
     }
 
     private void loadBackground() {
-        this.backgroundTexture = new Texture(Gdx.files.internal("images/menu_background.jpg"));
+        backgroundImage = new BackgroundImage(getBatch(), "menu_background.jpg");
+        // add resources to disposer
+        resourceDisposer.addResource(backgroundImage);
     }
 
     private void loadUISkin() {
         this.uiSkin = new Skin(Gdx.files.internal("skins/uiskin.json"));
+        // add resources to disposer
+        resourceDisposer.addResource(this.uiSkin);
     }
 
     private TextButton makeStartGameButton() {
@@ -144,36 +152,30 @@ public class StageMainMenu extends BaseStage {
     @Override
     public void handleRender() {
         super.handleRender();
-        this.batch.begin();
-        this.batch.draw(this.backgroundTexture, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        this.batch.end();
-
-        this.stage.draw();
+        this.getBatch().begin();
+        this.backgroundImage.draw(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        this.getBatch().end();
+        this.getStage().draw();
     }
 
     @Override
     public void handleUpdate(float deltaTime) {
-        this.stage.act(deltaTime);
+        this.getStage().act(deltaTime);
     }
 
     @Override
     public void handlePause(boolean isPaused) {
+        super.handlePause(isPaused);
         System.out.println("changed game state: " + (isPaused ? "pause" : "resume"));
     }
 
     @Override
     protected void unloadStage() {
-        buttonFont.dispose();
-        labelFont.dispose();
-        uiSkin.dispose();
-        stage.dispose();
-        batch.dispose();
-        font_captureIt.dispose();
-        font_malahit.dispose();
+        this.resourceDisposer.disposeAll();
     }
 
     private void startGameClickHandler() {
-        getStageManager().pushStage(new StageWorld( getStageManager() ));
+        getStageManager().pushStage(new StageWorld(getStageManager()));
     }
 
     private void aboutClickHandler() {
