@@ -57,7 +57,7 @@ public class StageMainMenu extends StageBase {
 
     private void createGameTittle() {
         this.gameTitle = new Label(GameConstants.GAME_TITLE, uiSkin, "title");
-        float x = Gdx.graphics.getWidth() - gameTitle.getWidth() - 45;
+        float x = Gdx.graphics.getWidth() - gameTitle.getWidth() - 130;
         float y = Gdx.graphics.getHeight() - 50;
         this.gameTitle.setPosition(x, y);
         this.getStage().addActor(this.gameTitle);
@@ -103,9 +103,9 @@ public class StageMainMenu extends StageBase {
 
     private TextButton makeStartGameButton() {
         TextButton button = new TextButton("Новая игра", uiSkin, "default");
-        float width = 230f;
+        float width = 430f;
         float height = 50f;
-        float x = Gdx.graphics.getWidth() - width - 65;
+        float x = Gdx.graphics.getWidth() - width - 50;
         float y = Gdx.graphics.getHeight() - height - (40 + 60 * 3);
         button.setBounds(x, y, width, height);
         button.addListener(new ClickListener() {
@@ -119,9 +119,9 @@ public class StageMainMenu extends StageBase {
 
     private TextButton makeAboutButton() {
         TextButton button = new TextButton("Об игре ...", uiSkin, "default");
-        float width = 230f;
+        float width = 430f;
         float height = 50f;
-        float x = Gdx.graphics.getWidth() - width - 65;
+        float x = Gdx.graphics.getWidth() - width - 50;
         float y = Gdx.graphics.getHeight() - height - (40 + 60 * 4);
         button.setBounds(x, y, width, height);
         button.addListener(new ClickListener() {
@@ -135,9 +135,9 @@ public class StageMainMenu extends StageBase {
 
     private TextButton makeExitGameButton() {
         TextButton button = new TextButton("Выйти из игры", uiSkin, "default");
-        float width = 230f;
+        float width = 430f;
         float height = 50f;
-        float x = Gdx.graphics.getWidth() - width - 65;
+        float x = Gdx.graphics.getWidth() - width - 50;
         float y = Gdx.graphics.getHeight() - height - (40 + 60 * 5);
         button.setBounds(x, y, width, height);
         button.addListener(new ClickListener() {

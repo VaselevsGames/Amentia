@@ -1,11 +1,12 @@
 package ru.vaselevs.amentia.core.entity;
 
+import ru.vaselevs.amentia.core.resource.IDisposable;
 import ru.vaselevs.amentia.core.world.WorldBase;
 
 /**
  * Created by CoreX on 23.03.2015.
  */
-public class EntityBase {
+public class EntityBase implements IDisposable {
     private WorldBase world;
 
     protected float x;
@@ -21,16 +22,14 @@ public class EntityBase {
         return this.world;
     }
 
-    protected void handleRender() {
-
+    protected void render() {
     }
 
-    protected void handleUpdate(float deltaTime) {
-
+    protected void update(float deltaTime) {
     }
 
-    protected void handleInput() {
+    @Override
+    public void dispose() {
 
     }
-
 }
