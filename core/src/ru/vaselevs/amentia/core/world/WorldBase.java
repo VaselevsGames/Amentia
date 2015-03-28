@@ -15,13 +15,14 @@ public class WorldBase implements IDisposable {
     private float height;
     private SpriteBatch batch;
     private BoundingBox boundingBox;
-    private WorldRendererBase worldRenderer;
+    private float groundLevel;
 
     protected WorldBase(SpriteBatch batch, float width, float height) {
         this.batch = batch;
         this.width = width;
         this.height = height;
         this.boundingBox = this.makeBoundingBox();
+        this.groundLevel = 50;
     }
 
     public SpriteBatch getBatch() {
@@ -46,6 +47,10 @@ public class WorldBase implements IDisposable {
 
     public BoundingBox getBoundingBox() {
         return this.boundingBox;
+    }
+
+    public float getGroundLevel() {
+        return this.groundLevel;
     }
 
 

@@ -11,10 +11,10 @@ public class Font implements IDisposable {
     FreeTypeFontGenerator generator;
     FreeTypeFontParameter parameter;
 
-    private static final String ru_charset = "АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯабвгдеёжзийклмнопрстуфхцчшщъыьэюя";
-    private static final String en_charset = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-    private static final String number_charset = "0123456789";
-    private static final String extra_charset = "~`!@#$%^&*()_+-=|<>?,./№;:[]'\\\"\u0020";
+    private static final String RU_CHARSET = "АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯабвгдеёжзийклмнопрстуфхцчшщъыьэюя";
+    private static final String EN_CHARSET = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+    private static final String NUMBER_CHARSET = "0123456789";
+    private static final String EXTRA_CHARSET = "~`!@#$%^&*()_+-=|<>?,./№;:[]'\\\"\u0020";
 
     public Font(String internalFont) {
         loadFont(internalFont);
@@ -26,7 +26,7 @@ public class Font implements IDisposable {
     }
 
     public BitmapFont generateFont(int size) {
-        parameter.characters = ru_charset + en_charset + number_charset + extra_charset;
+        parameter.characters = RU_CHARSET + EN_CHARSET + NUMBER_CHARSET + EXTRA_CHARSET;
         parameter.size = size;
         BitmapFont font = generator.generateFont(parameter);
         return font;

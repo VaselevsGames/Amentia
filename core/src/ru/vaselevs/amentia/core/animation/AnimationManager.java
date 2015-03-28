@@ -16,12 +16,16 @@ public class AnimationManager implements IDisposable {
 
     public AnimationManager() {
         this.resourceDisposer = new ResourceDisposer();
-        this.animations = new HashMap<String, Animation>();
+        this.animations = new HashMap<>();
     }
 
     public void add(String name, Animation animation) {
         this.resourceDisposer.addResource(animation);
         this.animations.put(name, animation);
+    }
+
+    public Animation get(String name) {
+        return this.animations.getOrDefault(name, null);
     }
 
     public void render(float x, float y, float width, float height, boolean flipX, boolean flipY) {
@@ -40,6 +44,9 @@ public class AnimationManager implements IDisposable {
 
     public boolean play(String animationName) {
         if (this.animations.containsKey(animationName)) {
+            if (this.currentAnimation != null) {
+                this.currentAnimation.stop();
+            }
             this.currentAnimation = this.animations.get(animationName);
             this.currentAnimation.play();
             return true;

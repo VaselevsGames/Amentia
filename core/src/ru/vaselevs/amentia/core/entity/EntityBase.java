@@ -6,7 +6,7 @@ import ru.vaselevs.amentia.core.world.WorldBase;
 /**
  * Created by CoreX on 23.03.2015.
  */
-public class EntityBase implements IDisposable {
+public abstract class EntityBase implements IDisposable {
     private WorldBase world;
 
     protected float x;

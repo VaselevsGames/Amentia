@@ -11,7 +11,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 /**
  * Created by CoreX on 22.03.2015.
  */
-public class StageBase {
+public abstract class StageBase {
 
     private Stage stage;
     private SpriteBatch batch;
@@ -31,7 +31,8 @@ public class StageBase {
     }
 
     protected void unloadStage() {
-        stage.dispose();
+        this.getBatch().dispose();
+        this.getStage().dispose();
     }
 
     protected void handleUpdate(float deltaTime) {
@@ -75,5 +76,4 @@ public class StageBase {
     private void updateInput() {
         Gdx.input.setInputProcessor(this.getStage());
     }
-
 }

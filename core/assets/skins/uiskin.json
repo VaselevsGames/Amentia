@@ -15,6 +15,9 @@
     toggle: { down: default-round-down, up: default-round, checked: default-round-down, font: default-font, fontColor: white, downFontColor: red }
   },
   com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle: {
-    title: { font: default-font, fontColor: white }
+    text: { font: default-font, fontColor: white }
+  },
+  com.badlogic.gdx.scenes.scene2d.ui.TextField$TextFieldStyle: {
+    text: { selection: selection, background: textfield, font: default-font, fontColor: white, cursor: cursor }
   }
 }

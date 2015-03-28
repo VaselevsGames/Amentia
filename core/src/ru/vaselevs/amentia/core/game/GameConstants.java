@@ -5,4 +5,5 @@ package ru.vaselevs.amentia.core.game;
  */
 public class GameConstants {
     public static final String GAME_TITLE = "Аменция: История горла";
+    public static final String GAME_VERSION = "0.1.1";
 }

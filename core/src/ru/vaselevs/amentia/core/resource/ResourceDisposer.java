@@ -13,8 +13,8 @@ public class ResourceDisposer {
     private List<Disposable> gdxResources;
 
     public ResourceDisposer() {
-        this.resources = new LinkedList<IDisposable>();
-        this.gdxResources = new LinkedList<Disposable>();
+        this.resources = new LinkedList<>();
+        this.gdxResources = new LinkedList<>();
     }
 
     public void addResource(IDisposable resource) {
@@ -26,12 +26,7 @@ public class ResourceDisposer {
     }
 
     public void disposeAll() {
-        for (IDisposable resource : this.resources ) {
-            resource.dispose();
-        }
-
-        for (Disposable gdxResource : this.gdxResources ) {
-            gdxResource.dispose();
-        }
+        this.resources.forEach(ru.vaselevs.amentia.core.resource.IDisposable::dispose);
+        this.gdxResources.forEach(com.badlogic.gdx.utils.Disposable::dispose);
     }
 }

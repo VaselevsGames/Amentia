@@ -13,7 +13,6 @@ public class StageWorld extends StageBase {
         this.worldFirst = new WorldFirst(getBatch());
     }
 
-
     @Override
     protected void handleUpdate(float deltaTime) {
         this.worldFirst.update(deltaTime);
