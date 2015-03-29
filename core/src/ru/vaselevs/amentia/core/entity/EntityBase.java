@@ -28,6 +28,8 @@ public abstract class EntityBase implements IDisposable {
     protected void update(float deltaTime) {
     }
 
+    public abstract void damage(int hit);
+
     @Override
     public void dispose() {
 

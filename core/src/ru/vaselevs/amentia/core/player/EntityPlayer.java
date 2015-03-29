@@ -108,6 +108,11 @@ public class EntityPlayer extends EntityBase {
         this.updateCamera();
     }
 
+    @Override
+    public void damage(int hit) {
+
+    }
+
     private void handleIdle(float deltaTime) {
         if (InputManager.isPressedLeft() || InputManager.isPressedRight()) {
             this.switchState(PlayerState.WALK);
@@ -178,12 +183,14 @@ public class EntityPlayer extends EntityBase {
         this.handlePlayerMoving(deltaTime, PlayerConstants.JUMP_HORIZONTAL_SPEED);
     }
 
+
     private void handleDeath(float deltaTime) {
         // handle death
         this.isDead = true;
         this.animationManager.play("death");
         this.hDirection = 1;
     }
+
 
     private void switchState(PlayerState newState) {
         if (newState == this.playerState) {
