@@ -20,16 +20,14 @@ public class EntityEnemyCaterpillar extends EntityBase {
 
     public EntityEnemyCaterpillar(WorldBase world, float x, float y) {
         super(world, x, y);
-        this.x = 1111;
-        this.y = 50;
-        this.width = 112;
-        this.height = 150;
+        this.width = 200;
+        this.height = 105;
         this.healthPoint = 100f;
 
         this.resourceDisposer = new ResourceDisposer();
         this.animationManager = new AnimationManager();
 
-        this.animationManager.add("move", new Animation("enemy/Caterpillar_2x1.png", world.getBatch(), 2, 0.15f, true));
+        this.animationManager.add("move", new Animation("enemy/Caterpillar_2x1.png", world.getBatch(), 2, 0.2f, true));
         this.animationManager.add("death", new Animation("enemy/EnemyDeath.png", world.getBatch(), 2, 0f, false));
 
         this.animationManager.play("move");
@@ -49,7 +47,7 @@ public class EntityEnemyCaterpillar extends EntityBase {
     @Override
     public void damage(int hit) {
         this.healthPoint -= hit;
-        if (this.healthPoint <= 0 ) {
+        if (this.healthPoint <= 0) {
             this.animationManager.play("death");
         }
     }

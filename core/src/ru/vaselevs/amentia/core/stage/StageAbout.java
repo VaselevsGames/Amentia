@@ -7,6 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
 import ru.vaselevs.amentia.core.font.Font;
 import ru.vaselevs.amentia.core.game.GameConstants;
+import ru.vaselevs.amentia.core.input.InputManager;
 import ru.vaselevs.amentia.core.resource.ResourceDisposer;
 
 
@@ -23,7 +24,6 @@ public class StageAbout extends StageBase {
     public StageAbout(StageManager stageManager) {
         super(stageManager);
         this.resourceDisposer = new ResourceDisposer();
-        Gdx.input.setInputProcessor(getStage());
         this.loadResources();
         this.createLabel();
     }
@@ -58,13 +58,19 @@ public class StageAbout extends StageBase {
         stringBuilder.append("> ...\n");
         stringBuilder.append("\n");
         stringBuilder.append("[ Разработчики ]\n");
-        stringBuilder.append("> DarkoreXOR\n");
         stringBuilder.append("> NstTaInt\n");
+        stringBuilder.append("    animation\n");
+        stringBuilder.append("    game-design\n");
+        stringBuilder.append("> DarkoreXOR\n");
+        stringBuilder.append("    game-development\n");
+        stringBuilder.append("    testing\n");
         stringBuilder.append("> MorozovArtem\n");
+        stringBuilder.append("    programming\n");
+        stringBuilder.append("    gameplay testing\n");
         stringBuilder.append("\n");
-        stringBuilder.append("[ Информация об разработке ]\n");
+        stringBuilder.append("[ Информация о разработке ]\n");
         stringBuilder.append("> Версия: " + GameConstants.GAME_VERSION + "\n");
-        stringBuilder.append("> Использовано в разработке: LibGDX framework\n");
+        stringBuilder.append("> Использовано в разработке: libGDX framework\n");
 
         Label label = new Label(stringBuilder, uiSkin, "text");
         label.setAlignment(Align.topLeft);
@@ -81,8 +87,16 @@ public class StageAbout extends StageBase {
     }
 
     @Override
+    protected void handleUpdate(float deltaTime) {
+        super.handleUpdate(deltaTime);
+        if(InputManager.isPressedEscape()) {
+            this.getStageManager().popStage();
+        }
+    }
+
+    @Override
     public void unloadStage() {
-        super.unloadStage();
         this.resourceDisposer.disposeAll();
+        super.unloadStage();
     }
 }

@@ -9,24 +9,25 @@ public class StageManager {
     private Stack<StageBase> stages;
 
     public StageManager() {
-        this.stages = new Stack<StageBase>();
+        this.stages = new Stack<>();
     }
 
-    public void pushStage(StageBase stage) {
+    public synchronized void pushStage(StageBase stage) {
         this.stages.push(stage);
         StageBase currentStage = getCurrentStage();
         currentStage.loadStage();
         this.handlePause(false);
     }
 
-    public void popStage() {
+    public synchronized void popStage() {
         StageBase currentStage = getCurrentStage();
         this.handlePause(true);
         currentStage.unloadStage();
         this.stages.pop();
+        this.getCurrentStage().updateInput();
     }
 
-    public void replaceCurrentStage(StageBase newStage) {
+    public synchronized void replaceCurrentStage(StageBase newStage) {
         this.popStage();
         this.pushStage(newStage);
     }
@@ -41,21 +42,20 @@ public class StageManager {
         currentStage.handleRender();
     }
 
-    public void handleResize(int width, int height) {
+    public synchronized void handleResize(int width, int height) {
         StageBase currentStage = getCurrentStage();
         currentStage.handleResize(width, height);
     }
 
-    public void handlePause(boolean isPaused) {
+    public synchronized void handlePause(boolean isPaused) {
         StageBase currentStage = getCurrentStage();
-        boolean currentState = currentStage.isPaused();
-        if (currentState != isPaused) {
+        if (currentStage.isPaused() != isPaused) {
             currentStage.handlePause(isPaused);
         }
     }
 
-    public void dispose() {
-        this.popStage();
+    public synchronized void dispose() {
+        this.stages.forEach(stage -> stage.unloadStage());
     }
 
     private StageBase getCurrentStage() {

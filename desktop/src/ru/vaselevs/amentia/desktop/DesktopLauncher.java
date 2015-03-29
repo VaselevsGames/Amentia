@@ -10,8 +10,8 @@ public class DesktopLauncher {
     public static void main (String[] args) {
         LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
         config.resizable = false;
-        config.width = 1200;
-        config.height = 850;
+        config.width = GameConstants.WINDOW_WIDTH;
+        config.height = GameConstants.WINDOW_HEIGHT;
         config.title = GameConstants.GAME_TITLE;
         new LwjglApplication(new AmentiaGame(), config);
     }

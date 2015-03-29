@@ -18,14 +18,13 @@ public class EntityEnemyHedgehog extends EntityBase {
 
     public EntityEnemyHedgehog(WorldBase world, float x, float y) {
         super(world, x, y);
-        this.x = 4421;
-        this.y = 50;
-        this.width = 112;
+        this.width = 184;
         this.height = 150;
         this.healthPoint = 100f;
 
         this.resourceDisposer = new ResourceDisposer();
         this.animationManager = new AnimationManager();
+        this.resourceDisposer.addResource(this.animationManager);
 
         this.animationManager.add("move", new Animation("enemy/Hedgehog_5x1.png", world.getBatch(), 5, 0.05f, true));
         this.animationManager.add("death", new Animation("enemy/EnemyDeath.png", world.getBatch(), 2, 0f, false));
@@ -47,13 +46,13 @@ public class EntityEnemyHedgehog extends EntityBase {
     @Override
     public void damage(int hit) {
         this.healthPoint -= hit;
-        if (this.healthPoint <= 0 ) {
+        if (this.healthPoint <= 0) {
             this.animationManager.play("death");
         }
     }
 
     @Override
     public void dispose() {
-        this.animationManager.dispose();
+        this.resourceDisposer.disposeAll();
     }
 }

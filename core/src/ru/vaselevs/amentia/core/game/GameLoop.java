@@ -8,7 +8,6 @@ import com.badlogic.gdx.Gdx;
 public class GameLoop {
 
     private float lastTime;
-    private boolean isRunning;
 
     public GameLoop() {
         this.lastTime = 0;
@@ -30,10 +29,6 @@ public class GameLoop {
 
     public void handleRender() {
 
-    }
-
-    public void setRuning(boolean isRunning) {
-        this.isRunning = isRunning;
     }
 
 }

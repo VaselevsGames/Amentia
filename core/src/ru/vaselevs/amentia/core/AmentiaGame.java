@@ -3,6 +3,7 @@ package ru.vaselevs.amentia.core;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import ru.vaselevs.amentia.core.game.GameLoop;
+import ru.vaselevs.amentia.core.stage.StageDebug;
 import ru.vaselevs.amentia.core.stage.StageMainMenu;
 import ru.vaselevs.amentia.core.stage.StageManager;
 
@@ -26,9 +27,9 @@ public class AmentiaGame implements ApplicationListener {
             }
         };
 
+        this.stageManager.pushStage(new StageDebug(this.stageManager));
         this.stageManager.pushStage(new StageMainMenu(this.stageManager));
         this.resize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        this.gameLoop.setRuning(true);
     }
 
     @Override
@@ -53,7 +54,6 @@ public class AmentiaGame implements ApplicationListener {
 
     @Override
     public void dispose() {
-        this.gameLoop.setRuning(false);
         this.stageManager.dispose();
     }
 }

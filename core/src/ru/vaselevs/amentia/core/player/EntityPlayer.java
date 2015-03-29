@@ -14,15 +14,15 @@ import ru.vaselevs.amentia.core.world.WorldBase;
  * Created by CoreX on 23.03.2015.
  */
 public class EntityPlayer extends EntityBase {
-    private int hDirection;
+    private ResourceDisposer resourceDisposer;
 
     private OrthographicCamera camera;
-    private ResourceDisposer resourceDisposer;
     private AnimationManager animationManager;
-
     private PlayerState playerState;
 
     private float startJumpHeight;
+
+    private int horizontalDirection;
     private float currentJumpHeight;
     private boolean isJumping;
     private boolean isFalling;
@@ -33,14 +33,9 @@ public class EntityPlayer extends EntityBase {
         this.resourceDisposer = new ResourceDisposer();
         this.initializeCamera();
         this.initializeAnimation(this.getWorld());
-
-
-
-        // player size
+        this.initializePlayer();
         this.width = 112;
         this.height = 150;
-
-        this.initializePlayer();
     }
 
     private void initializeCamera() {
@@ -64,7 +59,7 @@ public class EntityPlayer extends EntityBase {
         this.isJumping = false;
         this.isFalling = false;
         this.isDead = false;
-        this.hDirection = 0;
+        this.horizontalDirection = 0;
         this.playerState = PlayerState.IDLE;
         this.switchState(PlayerState.IDLE);
     }
@@ -72,7 +67,7 @@ public class EntityPlayer extends EntityBase {
     @Override
     public void render() {
         this.getWorld().getBatch().setProjectionMatrix(this.camera.combined);
-        boolean flipX = this.hDirection == -1 ? true : false;
+        boolean flipX = this.horizontalDirection == -1 ? true : false;
         this.animationManager.render(this.x, this.y, this.width, this.height, flipX, false);
     }
 
@@ -169,6 +164,7 @@ public class EntityPlayer extends EntityBase {
             } else {
                 this.isFalling = false;
                 this.currentJumpHeight = 0f;
+                this.y = this.startJumpHeight;
                 this.switchState(PlayerState.IDLE);
             }
         }
@@ -181,7 +177,7 @@ public class EntityPlayer extends EntityBase {
         // handle death
         this.isDead = true;
         this.animationManager.play("death");
-        this.hDirection = 1;
+        this.horizontalDirection = 1;
     }
 
 
@@ -203,7 +199,7 @@ public class EntityPlayer extends EntityBase {
         this.x += hDirection * moveSpeed * deltaTime;
 
         if (hDirection != 0) {
-            this.hDirection = hDirection;
+            this.horizontalDirection = hDirection;
         }
     }
 

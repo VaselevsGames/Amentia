@@ -43,13 +43,18 @@ public class AnimationManager implements IDisposable {
     }
 
     public boolean play(String animationName) {
-        if (this.animations.containsKey(animationName)) {
+        Animation newAnimation = this.get(animationName);
+
+        if (newAnimation != null) {
             if (this.currentAnimation != null) {
-                this.currentAnimation.stop();
+                this.stop();
             }
-            this.currentAnimation = this.animations.get(animationName);
-            this.currentAnimation.play();
-            return true;
+            this.currentAnimation = this.get(animationName);
+            if (newAnimation != null) {
+                newAnimation.play();
+                return true;
+            }
+            return false;
         }
         return false;
     }

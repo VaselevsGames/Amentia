@@ -21,8 +21,8 @@ public class StageMainMenu extends StageBase {
     private ResourceDisposer resourceDisposer;
     private Skin uiSkin;
 
-    private static final float PANEL_BOUND_FROM = 678;
-    private static final float PANEL_BOUND_TO = 1200;
+    private static final float PANEL_BOUND_FROM = 560;
+    private static final float PANEL_BOUND_TO = 1000;
 
     // font
     private Font font_captureIt;
@@ -36,7 +36,6 @@ public class StageMainMenu extends StageBase {
     public StageMainMenu(StageManager stageManager) {
         super(stageManager);
         this.resourceDisposer = new ResourceDisposer();
-        Gdx.input.setInputProcessor(getStage());
         this.loadResources();
         this.initializeMenu();
     }

@@ -53,11 +53,11 @@ public abstract class StageBase {
         this.getStage().getViewport().setWorldSize(width, height);
     }
 
-    public Stage getStage() {
+    public synchronized Stage getStage() {
         return this.stage;
     }
 
-    public SpriteBatch getBatch() {
+    public synchronized SpriteBatch getBatch() {
         return this.batch;
     }
 
@@ -65,15 +65,15 @@ public abstract class StageBase {
         return this.isPaused;
     }
 
-    public StageManager getStageManager() {
+    public synchronized StageManager getStageManager() {
         return this.stageManager;
     }
 
-    public float getDeltaTime() {
+    public synchronized float getDeltaTime() {
         return Gdx.graphics.getDeltaTime();
     }
 
-    private void updateInput() {
+    public void updateInput() {
         Gdx.input.setInputProcessor(this.getStage());
     }
 }

@@ -18,14 +18,14 @@ public class EntityEnemyDerelict extends EntityBase {
 
     public EntityEnemyDerelict(WorldBase world, float x, float y) {
         super(world, x, y);
-         this.width = 112;
+        this.width = 101;
         this.height = 150;
         this.healthPoint = 100f;
 
         this.resourceDisposer = new ResourceDisposer();
         this.animationManager = new AnimationManager();
 
-        this.animationManager.add("move", new Animation("enemy/Derelict_2x1.png", world.getBatch(), 2, 0.1f, true));
+        this.animationManager.add("move", new Animation("enemy/Derelict_2x1.png", world.getBatch(), 2, 0.2f, true));
         this.animationManager.add("death", new Animation("enemy/EnemyDeath.png", world.getBatch(), 2, 0f, false));
 
         this.animationManager.play("move");
