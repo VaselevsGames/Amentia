@@ -106,6 +106,11 @@ public class EntityPlayer extends EntityBase {
         }
     }
 
+    @Override
+    public void damage(int hit) {
+
+    }
+
     private void doMoving() {
 
     }
