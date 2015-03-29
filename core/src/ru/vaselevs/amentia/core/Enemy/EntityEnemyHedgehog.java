@@ -1,4 +1,4 @@
-package ru.vaselevs.amentia.core.Enemy;
+package ru.vaselevs.amentia.core.enemy;
 
 import ru.vaselevs.amentia.core.animation.Animation;
 import ru.vaselevs.amentia.core.animation.AnimationManager;
@@ -16,8 +16,8 @@ public class EntityEnemyHedgehog extends EntityBase {
 
     private float healthPoint;
 
-    public EntityEnemyHedgehog(WorldBase world) {
-        super(world);
+    public EntityEnemyHedgehog(WorldBase world, float x, float y) {
+        super(world, x, y);
         this.x = 4421;
         this.y = 50;
         this.width = 112;
@@ -27,8 +27,8 @@ public class EntityEnemyHedgehog extends EntityBase {
         this.resourceDisposer = new ResourceDisposer();
         this.animationManager = new AnimationManager();
 
-        this.animationManager.add("move", new Animation("Enemy/Hedgehog_5x1.png", world.getBatch(), 5, 184, 150, 0.05f, true));
-        this.animationManager.add("death", new Animation("Enemy/EnemyDeath.png", world.getBatch(), 2, 162, 150, 0f, false));
+        this.animationManager.add("move", new Animation("enemy/Hedgehog_5x1.png", world.getBatch(), 5, 0.05f, true));
+        this.animationManager.add("death", new Animation("enemy/EnemyDeath.png", world.getBatch(), 2, 0f, false));
 
         this.animationManager.play("move");
     }

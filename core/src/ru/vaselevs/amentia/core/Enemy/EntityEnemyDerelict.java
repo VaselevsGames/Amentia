@@ -1,4 +1,4 @@
-package ru.vaselevs.amentia.core.Enemy;
+package ru.vaselevs.amentia.core.enemy;
 
 import ru.vaselevs.amentia.core.animation.Animation;
 import ru.vaselevs.amentia.core.animation.AnimationManager;
@@ -16,19 +16,17 @@ public class EntityEnemyDerelict extends EntityBase {
 
     private float healthPoint;
 
-    public EntityEnemyDerelict(WorldBase world) {
-        super(world);
-        this.x = 8842;
-        this.y = 50;
-        this.width = 112;
+    public EntityEnemyDerelict(WorldBase world, float x, float y) {
+        super(world, x, y);
+         this.width = 112;
         this.height = 150;
         this.healthPoint = 100f;
 
         this.resourceDisposer = new ResourceDisposer();
         this.animationManager = new AnimationManager();
 
-        this.animationManager.add("move", new Animation("Enemy/Derelict_2x1.png", world.getBatch(), 2, 101, 150, 0.1f, true));
-        this.animationManager.add("death", new Animation("Enemy/EnemyDeath.png", world.getBatch(), 2, 162, 150, 0f, false));
+        this.animationManager.add("move", new Animation("enemy/Derelict_2x1.png", world.getBatch(), 2, 0.1f, true));
+        this.animationManager.add("death", new Animation("enemy/EnemyDeath.png", world.getBatch(), 2, 0f, false));
 
         this.animationManager.play("move");
     }

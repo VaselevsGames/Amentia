@@ -14,18 +14,20 @@ public abstract class EntityBase implements IDisposable {
     protected float width;
     protected float height;
 
-    protected EntityBase(WorldBase world) {
+    protected EntityBase(WorldBase world, float x, float y) {
         this.world = world;
+        this.x=x;
+        this.y=y;
     }
 
     protected WorldBase getWorld() {
         return this.world;
     }
 
-    protected void render() {
+    public void render() {
     }
 
-    protected void update(float deltaTime) {
+    public void update(float deltaTime) {
     }
 
     public abstract void damage(int hit);

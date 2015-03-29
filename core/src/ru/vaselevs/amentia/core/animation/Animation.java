@@ -28,12 +28,12 @@ public class Animation implements IDisposable {
     private boolean loop;
     private boolean markReplay;
 
-    public Animation(String internalFile, SpriteBatch batch, int framesNum, int frameWidth, int frameHeight, float frameTime, boolean loop) {
+    public Animation(String internalFile, SpriteBatch batch, int framesNum, float frameTime, boolean loop) {
         this.texture = new Texture(Gdx.files.internal("images/sprite/animation/" + internalFile));
         this.batch = batch;
         this.framesNum = framesNum;
-        this.frameWidth = frameWidth;
-        this.frameHeight = frameHeight;
+        this.frameWidth = this.texture.getWidth() / framesNum;
+        this.frameHeight = this.texture.getHeight();
         this.frameTime = frameTime;
         this.frameTimeAccumulator = 0;
         this.currentFrame = 0;

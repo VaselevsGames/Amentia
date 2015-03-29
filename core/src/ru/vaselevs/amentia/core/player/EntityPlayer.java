@@ -14,11 +14,6 @@ import ru.vaselevs.amentia.core.world.WorldBase;
  * Created by CoreX on 23.03.2015.
  */
 public class EntityPlayer extends EntityBase {
-    public float x;
-    public float y;
-    public float width;
-    public float height;
-
     private int hDirection;
 
     private OrthographicCamera camera;
@@ -33,15 +28,13 @@ public class EntityPlayer extends EntityBase {
     private boolean isFalling;
     private boolean isDead;
 
-    public EntityPlayer(WorldBase world) {
-        super(world);
+    public EntityPlayer(WorldBase world, float x, float y) {
+        super(world, x ,y);
         this.resourceDisposer = new ResourceDisposer();
         this.initializeCamera();
         this.initializeAnimation(this.getWorld());
 
-        // start position
-        this.x = 100;
-        this.y = 50;
+
 
         // player size
         this.width = 112;
@@ -59,11 +52,11 @@ public class EntityPlayer extends EntityBase {
         this.animationManager = new AnimationManager();
         this.resourceDisposer.addResource(this.animationManager);
 
-        this.animationManager.add("idle", new Animation("hero/Point.png", world.getBatch(), 1, 118, 149, 0f, true));
-        this.animationManager.add("walk", new Animation("hero/Move_4x1.png", world.getBatch(), 4, 112, 150, 0.15f, true));
-        this.animationManager.add("jump", new Animation("hero/Jump.png", world.getBatch(), 1, 118, 149, 0f, true));
-        this.animationManager.add("fall", new Animation("hero/Fall.png", world.getBatch(), 1, 118, 149, 0f, true));
-        this.animationManager.add("death", new Animation("hero/Death_5x1.png", world.getBatch(), 5, 162, 150, 0.1f, false));
+        this.animationManager.add("idle", new Animation("hero/Point.png", world.getBatch(), 1, 0f, true));
+        this.animationManager.add("walk", new Animation("hero/Move_4x1.png", world.getBatch(), 4, 0.15f, true));
+        this.animationManager.add("jump", new Animation("hero/Jump.png", world.getBatch(), 1, 0f, true));
+        this.animationManager.add("fall", new Animation("hero/Fall.png", world.getBatch(), 1, 0f, true));
+        this.animationManager.add("death", new Animation("hero/Death_5x1.png", world.getBatch(), 5, 0.1f, false));
     }
 
     private void initializePlayer() {
@@ -193,26 +186,7 @@ public class EntityPlayer extends EntityBase {
 
 
     private void switchState(PlayerState newState) {
-        if (newState == this.playerState) {
-            this.animationManager.stop();
-        }
-        switch (this.playerState) {
-            case IDLE:
-                this.animationManager.play("idle");
-                break;
-            case WALK:
-                this.animationManager.play("walk");
-                break;
-            case JUMP:
-                this.animationManager.play("jump");
-                break;
-            case FALL:
-                this.animationManager.play("fall");
-                break;
-            case DEATH:
-                this.animationManager.play("death");
-                break;
-        }
+
         this.playerState = newState;
     }
 
