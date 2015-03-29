@@ -29,7 +29,7 @@ public class WorldRendererFirst extends WorldRendererBase {
 
     @Override
     public void render() {
-        this.backgroundImage.draw(0, 250, this.backgroundImage.getWidth(), this.backgroundImage.getHeight());
+        this.backgroundImage.draw(0, 230, this.backgroundImage.getWidth(), this.backgroundImage.getHeight());
         this.groundImage.draw(0, 0, this.groundImage.getWidth(), this.groundImage.getHeight());
     }
 

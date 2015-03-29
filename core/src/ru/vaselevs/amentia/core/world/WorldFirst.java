@@ -17,7 +17,7 @@ import java.util.List;
 public class WorldFirst extends WorldBase {
 
     private static final int WORLD_WIDTH = 8842;
-    private static final int WORLD_HEIGHT = 850;
+    private static final int WORLD_HEIGHT = 800;
 
     private WorldRendererFirst worldRenderer;
 

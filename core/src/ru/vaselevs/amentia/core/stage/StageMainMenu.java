@@ -54,7 +54,7 @@ public class StageMainMenu extends StageBase {
     }
 
     private void loadBackground() {
-        this.backgroundImage = new BackgroundImage(getBatch(), "menu_background.jpg");
+        this.backgroundImage = new BackgroundImage(getBatch(), "menu_background.png");
         // add resources to disposer
         this.resourceDisposer.addResource(backgroundImage);
     }
