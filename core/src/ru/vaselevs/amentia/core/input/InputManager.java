@@ -43,4 +43,8 @@ public class InputManager {
     public static boolean isPressedRMB() {
         return isMouseButtonPressed(Input.Buttons.RIGHT);
     }
+
+    public static boolean isPressedRestart() {
+        return isKeyPressed(Input.Keys.R);
+    }
 }

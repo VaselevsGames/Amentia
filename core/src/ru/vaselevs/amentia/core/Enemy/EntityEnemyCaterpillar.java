@@ -90,4 +90,9 @@ public class EntityEnemyCaterpillar extends EntityBase {
     public void dispose() {
         this.animationManager.dispose();
     }
+
+    @Override
+    public float getHealthPoints() {
+        return this.healthPoints;
+    }
 }

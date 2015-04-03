@@ -10,7 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import ru.vaselevs.amentia.core.font.Font;
 import ru.vaselevs.amentia.core.game.GameConstants;
 import ru.vaselevs.amentia.core.helper.MathHelper;
-import ru.vaselevs.amentia.core.image.BackgroundImage;
+import ru.vaselevs.amentia.core.image.UserInterfaceImage;
 import ru.vaselevs.amentia.core.resource.ResourceDisposer;
 
 /**
@@ -31,7 +31,7 @@ public class StageMainMenu extends StageBase {
     private BitmapFont labelFont;
 
     // textures
-    private BackgroundImage backgroundImage;
+    private UserInterfaceImage backgroundImage;
 
     public StageMainMenu(StageManager stageManager) {
         super(stageManager);
@@ -53,7 +53,7 @@ public class StageMainMenu extends StageBase {
     }
 
     private void loadBackground() {
-        this.backgroundImage = new BackgroundImage(getBatch(), "menu_background.png");
+        this.backgroundImage = new UserInterfaceImage(getBatch(), "background/menu_background.png");
         // add resources to disposer
         this.resourceDisposer.addResource(backgroundImage);
     }

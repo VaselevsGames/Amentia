@@ -88,4 +88,9 @@ public class EntityEnemyHedgehog extends EntityBase {
     public void dispose() {
         this.resourceDisposer.disposeAll();
     }
+
+    @Override
+    public float getHealthPoints() {
+        return this.healthPoints;
+    }
 }

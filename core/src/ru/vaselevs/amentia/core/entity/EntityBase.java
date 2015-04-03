@@ -73,4 +73,6 @@ public abstract class EntityBase implements IDisposable, ICollidable {
 
     @Override
     public abstract void dispose();
+
+    public abstract float getHealthPoints();
 }

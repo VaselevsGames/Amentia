@@ -8,6 +8,7 @@ import com.badlogic.gdx.math.collision.BoundingBox;
 import com.badlogic.gdx.physics.box2d.World;
 import ru.vaselevs.amentia.core.entity.EntityBase;
 import ru.vaselevs.amentia.core.resource.IDisposable;
+import ru.vaselevs.amentia.core.stage.StageManager;
 
 import javax.swing.text.html.parser.Entity;
 
@@ -18,19 +19,31 @@ public abstract class WorldBase implements IDisposable {
     private float width;
     private float height;
     private SpriteBatch batch;
+    private SpriteBatch batchUI;
     private BoundingBox boundingBox;
     private float groundLevel;
+    private StageManager stageManager;
 
-    protected WorldBase(SpriteBatch batch, float width, float height) {
+    protected WorldBase(StageManager stageManager, SpriteBatch batch, SpriteBatch batchUI, float width, float height) {
+        this.stageManager = stageManager;
         this.batch = batch;
+        this.batchUI = batchUI;
         this.width = width;
         this.height = height;
         this.boundingBox = this.makeBoundingBox();
         this.groundLevel = 50;
     }
 
+    public StageManager getStageManager() {
+        return this.stageManager;
+    }
+
     public SpriteBatch getBatch() {
         return this.batch;
+    }
+
+    public SpriteBatch getBatchUI() {
+        return this.batchUI;
     }
 
     public float getWidth() {
@@ -57,12 +70,14 @@ public abstract class WorldBase implements IDisposable {
         return this.boundingBox;
     }
 
+
     public float getGroundLevel() {
         return this.groundLevel;
     }
 
-
     protected abstract void render();
+
+    protected abstract void renderUI();
 
     protected abstract void update(float deltaTime);
 

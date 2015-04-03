@@ -4,9 +4,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL30;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.utils.viewport.FillViewport;
-import com.badlogic.gdx.utils.viewport.ScreenViewport;
-import com.badlogic.gdx.utils.viewport.Viewport;
 
 /**
  * Created by CoreX on 22.03.2015.
@@ -15,6 +12,7 @@ public abstract class StageBase {
 
     private Stage stage;
     private SpriteBatch batch;
+    private SpriteBatch batchUI;
     private boolean isPaused;
 
     private StageManager stageManager;
@@ -22,6 +20,7 @@ public abstract class StageBase {
     protected StageBase(StageManager stageManager) {
         this.stage = new Stage();
         this.batch = new SpriteBatch();
+        this.batchUI = new SpriteBatch();
         this.updateInput();
         this.stageManager = stageManager;
     }
@@ -32,6 +31,7 @@ public abstract class StageBase {
 
     protected void unloadStage() {
         this.getBatch().dispose();
+        this.getBatchUI().dispose();
         this.getStage().dispose();
     }
 
@@ -48,7 +48,7 @@ public abstract class StageBase {
         this.isPaused = isPaused;
     }
 
-    protected void handleResize( int width, int height ) {
+    protected void handleResize(int width, int height) {
         this.updateInput();
         this.getStage().getViewport().setWorldSize(width, height);
     }
@@ -59,6 +59,10 @@ public abstract class StageBase {
 
     public synchronized SpriteBatch getBatch() {
         return this.batch;
+    }
+
+    public synchronized SpriteBatch getBatchUI() {
+        return this.batchUI;
     }
 
     public boolean isPaused() {

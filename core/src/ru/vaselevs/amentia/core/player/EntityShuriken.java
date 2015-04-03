@@ -74,4 +74,9 @@ public class EntityShuriken extends EntityBase {
     public void dispose() {
         this.resourceDisposer.disposeAll();
     }
+
+    @Override
+    public float getHealthPoints() {
+        return 0f;
+    }
 }

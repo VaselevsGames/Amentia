@@ -276,6 +276,11 @@ public class EntityPlayer extends EntityBase {
     }
 
     @Override
+    public float getHealthPoints() {
+        return this.healthPoints;
+    }
+
+    @Override
     public boolean isDead() {
         return this.healthPoints <= 0f;
     }
