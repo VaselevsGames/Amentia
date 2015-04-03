@@ -78,4 +78,12 @@ public class AnimationManager implements IDisposable {
         this.resourceDisposer.disposeAll();
         this.animations.clear();
     }
+
+    public boolean isRunning() {
+        Animation animation = this.currentAnimation;
+        if (animation != null) {
+            return animation.isRunning();
+        }
+        return false;
+    }
 }

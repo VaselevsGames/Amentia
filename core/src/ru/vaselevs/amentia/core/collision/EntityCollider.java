@@ -1,9 +1,8 @@
-package ru.vaselevs.amentia.core.physics;
+package ru.vaselevs.amentia.core.collision;
 
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.math.Vector2;
 import ru.vaselevs.amentia.core.entity.EntityBase;
 
 import java.util.HashMap;
@@ -12,7 +11,7 @@ import java.util.Map;
 /**
  * Created by CoreX on 01.04.2015.
  */
-public class Collider<T extends EntityBase> {
+public class EntityCollider<T extends EntityBase> {
 
     private T entity;
 
@@ -25,7 +24,7 @@ public class Collider<T extends EntityBase> {
 
     private ShapeRenderer shapeRenderer;
 
-    public Collider(T entity) {
+    public EntityCollider(T entity) {
         this.entity = entity;
         this.collidedEntitiesMap = new HashMap<>();
         this.shapeRenderer = new ShapeRenderer();
@@ -54,10 +53,10 @@ public class Collider<T extends EntityBase> {
         return this.entity;
     }
 
-    public void collidedWith(Collider collider) {
-        if (!collidedEntitiesMap.containsKey(collider.getEntity())) {
-            collidedEntitiesMap.put(collider.getEntity(), 0f);
-            this.getEntity().collidedWith(collider.getEntity());
+    public void collidedWith(EntityCollider entityCollider) {
+        if (!collidedEntitiesMap.containsKey(entityCollider.getEntity())) {
+            collidedEntitiesMap.put(entityCollider.getEntity(), 0f);
+            this.getEntity().collidedWith(entityCollider.getEntity());
         }
     }
 

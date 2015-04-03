@@ -53,6 +53,7 @@ public class Animation implements IDisposable {
                 this.frameTimeAccumulator = 0f;
 
                 if (this.currentFrame == 0) {
+                    this.isRunning = true;
                     this.onStart((a) -> {
                     });
                 }
@@ -64,6 +65,9 @@ public class Animation implements IDisposable {
                     this.markReplay = false;
                     this.onFinish((a) -> {
                     });
+                    if(!this.loop) {
+                        this.isRunning = false;
+                    }
                     if (this.markReplay || this.loop) {
                         this.currentFrame = 0;
                     } else {
@@ -114,5 +118,9 @@ public class Animation implements IDisposable {
     @Override
     public void dispose() {
         texture.dispose();
+    }
+
+    public boolean isRunning() {
+        return this.isRunning;
     }
 }

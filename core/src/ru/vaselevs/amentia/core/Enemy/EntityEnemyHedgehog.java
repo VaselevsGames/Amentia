@@ -4,6 +4,7 @@ import com.badlogic.gdx.math.Rectangle;
 import ru.vaselevs.amentia.core.animation.Animation;
 import ru.vaselevs.amentia.core.animation.AnimationManager;
 import ru.vaselevs.amentia.core.entity.EntityBase;
+import ru.vaselevs.amentia.core.player.EntityShuriken;
 import ru.vaselevs.amentia.core.resource.ResourceDisposer;
 import ru.vaselevs.amentia.core.world.WorldBase;
 
@@ -29,7 +30,7 @@ public class EntityEnemyHedgehog extends EntityBase {
         this.resourceDisposer.addResource(this.animationManager);
 
         this.animationManager.add("move", new Animation("enemy/Hedgehog_5x1.png", world.getBatch(), 5, 0.1f, true));
-        this.animationManager.add("death", new Animation("enemy/EnemyDeath.png", world.getBatch(), 2, 0f, false));
+        this.animationManager.add("death", new Animation("enemy/EnemyDeath.png", world.getBatch(), 2, 0.25f, false));
 
         this.animationManager.play("move");
     }
@@ -42,7 +43,12 @@ public class EntityEnemyHedgehog extends EntityBase {
     @Override
     public void update(float deltaTime) {
         this.animationManager.update(deltaTime);
-        this.x += -1 * 250f * deltaTime;
+
+        if (!this.isDead()) {
+            this.x += -1 * 250f * deltaTime;
+        } else if (!this.animationManager.isRunning()) {
+            this.getWorld().addEntityToDespawnQueue(this);
+        }
     }
 
     private void damage(float hit) {
@@ -65,8 +71,17 @@ public class EntityEnemyHedgehog extends EntityBase {
 
     @Override
     public void collidedWith(EntityBase entity) {
-        //System.out.println(this.name + " collided with " + entity.getName());
-        //damage(30f);
+        if (entity instanceof EntityShuriken) {
+            this.damage(30f);
+            if(!this.isDead()) {
+                this.getWorld().addEntityToDespawnQueue(entity);
+            }
+        }
+    }
+
+    @Override
+    public boolean isDead() {
+        return this.healthPoints <= 0f;
     }
 
     @Override

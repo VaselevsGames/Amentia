@@ -8,7 +8,7 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 public class Timer {
 
     public interface TimerCallback {
-        void finish();
+        void finish(Timer timer);
     }
 
     private float initialTime;
@@ -16,10 +16,15 @@ public class Timer {
 
     private boolean isRunning;
 
-    public Timer(float time) {
+    TimerCallback finishCallback;
+
+    public Timer(float time, boolean createSuspended) {
         this.initialTime = time;
         this.time = time;
-        this.isRunning = true;
+        this.isRunning = !createSuspended;
+        this.finishCallback = t -> {
+            throw new NotImplementedException();
+        };
     }
 
     public void update(float deltaTime) {
@@ -27,15 +32,17 @@ public class Timer {
             this.time -= deltaTime;
             if (this.time <= 0f) {
                 this.stop();
-                finish(this, () -> {
-                    throw new NotImplementedException();
-                });
+                this.finishCallback.finish(this);
             }
         }
     }
 
-    public void finish(Timer timer, TimerCallback timerCallback) {
-        timerCallback.finish();
+    public boolean isRunning() {
+        return this.isRunning;
+    }
+
+    public void finish(TimerCallback timerCallback) {
+        this.finishCallback = timerCallback;
     }
 
     public void resetTimer(float time, boolean updateInitialTime) {
@@ -53,4 +60,6 @@ public class Timer {
     public void stop() {
         this.isRunning = false;
     }
+
+
 }

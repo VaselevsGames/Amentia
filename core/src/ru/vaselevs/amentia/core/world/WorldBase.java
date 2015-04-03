@@ -6,7 +6,10 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.collision.BoundingBox;
 import com.badlogic.gdx.physics.box2d.World;
+import ru.vaselevs.amentia.core.entity.EntityBase;
 import ru.vaselevs.amentia.core.resource.IDisposable;
+
+import javax.swing.text.html.parser.Entity;
 
 /**
  * Created by CoreX on 23.03.2015.
@@ -46,6 +49,10 @@ public abstract class WorldBase implements IDisposable {
         return new BoundingBox(min, max);
     }
 
+    public abstract void addEntityToSpawnQueue(EntityBase entity);
+
+    protected abstract void spawnEntity(EntityBase entity);
+
     public BoundingBox getBoundingBox() {
         return this.boundingBox;
     }
@@ -63,4 +70,6 @@ public abstract class WorldBase implements IDisposable {
 
     @Override
     public abstract void dispose();
+
+    public abstract void addEntityToDespawnQueue(EntityBase entity);
 }

@@ -1,6 +1,6 @@
 package ru.vaselevs.amentia.core.entity;
 
-import ru.vaselevs.amentia.core.physics.ICollidable;
+import ru.vaselevs.amentia.core.collision.ICollidable;
 import ru.vaselevs.amentia.core.resource.IDisposable;
 import ru.vaselevs.amentia.core.world.WorldBase;
 
@@ -68,6 +68,8 @@ public abstract class EntityBase implements IDisposable, ICollidable {
     public abstract void update(float deltaTime);
 
     public abstract void collidedWith(EntityBase entity);
+
+    public abstract boolean isDead();
 
     @Override
     public abstract void dispose();

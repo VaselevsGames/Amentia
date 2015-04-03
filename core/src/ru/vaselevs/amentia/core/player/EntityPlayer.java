@@ -7,6 +7,7 @@ import com.badlogic.gdx.math.collision.BoundingBox;
 import ru.vaselevs.amentia.core.animation.Animation;
 import ru.vaselevs.amentia.core.animation.AnimationManager;
 import ru.vaselevs.amentia.core.entity.EntityBase;
+import ru.vaselevs.amentia.core.helper.Timer;
 import ru.vaselevs.amentia.core.input.InputManager;
 import ru.vaselevs.amentia.core.resource.ResourceDisposer;
 import ru.vaselevs.amentia.core.world.WorldBase;
@@ -28,9 +29,10 @@ public class EntityPlayer extends EntityBase {
     private float currentJumpHeight;
     private boolean isJumping;
     private boolean isFalling;
-    private boolean isDead;
 
     private float healthPoints;
+
+    private Timer shurikenTimer;
 
     public EntityPlayer(WorldBase world, float x, float y) {
         super(world, x, y);
@@ -41,6 +43,7 @@ public class EntityPlayer extends EntityBase {
         this.height = 150;
         this.name = "EntityPlayer";
         this.healthPoints = PlayerConstants.HEALTH_POINTS;
+        this.initializeTimer();
     }
 
     private void initializeAnimation() {
@@ -60,10 +63,14 @@ public class EntityPlayer extends EntityBase {
         this.currentJumpHeight = 0f;
         this.isJumping = false;
         this.isFalling = false;
-        this.isDead = false;
         this.horizontalDirection = 0;
         this.playerState = PlayerState.IDLE;
         this.switchState(PlayerState.IDLE);
+    }
+
+    private void initializeTimer() {
+        this.shurikenTimer = new Timer(0f, true);
+        this.shurikenTimer.finish(t -> {});
     }
 
     @Override
@@ -93,11 +100,34 @@ public class EntityPlayer extends EntityBase {
                 this.handleDeath(deltaTime);
                 break;
         }
+
+        if(!this.isDead()) {
+            this.shurikenTimer.update(deltaTime);
+            if (InputManager.isPressedLBM()) {
+                this.spawnShuriken();
+            }
+        }
         this.updateCamera();
     }
 
+    private void spawnShuriken() {
+        if (!this.shurikenTimer.isRunning()) {
+            this.shurikenTimer.resetTimer(0.5f, false);
+            float x = this.getX();
+            if (this.horizontalDirection == -1) {
+                x -= 100f;
+            } else {
+                x += 100f;
+            }
+
+            float y = (this.getY() + this.getWidth()) / 2f;
+
+            this.getWorld().addEntityToSpawnQueue(new EntityShuriken(this.getWorld(), x, y, this.horizontalDirection));
+        }
+    }
+
     private void damage(float hit) {
-        if(!this.isDead()) {
+        if (!this.isDead()) {
             this.healthPoints -= hit;
             if (this.healthPoints <= 0) {
                 this.switchState(PlayerState.DEATH);
@@ -108,7 +138,11 @@ public class EntityPlayer extends EntityBase {
     @Override
     public void collidedWith(EntityBase entity) {
         //System.out.println(this.name + " collided with " + entity.getName());
-        damage(34f);
+        if(!entity.isDead()) {
+            if (!(entity instanceof EntityShuriken)) {
+                damage(34f);
+            }
+        }
     }
 
     @Override
@@ -191,7 +225,7 @@ public class EntityPlayer extends EntityBase {
 
     private void handleDeath(float deltaTime) {
         // handle death
-        this.isDead = true;
+        this.healthPoints = 0f;
         this.animationManager.play("death");
         this.horizontalDirection = 1;
     }
@@ -219,7 +253,7 @@ public class EntityPlayer extends EntityBase {
             this.x = worldLeftBound;
         }
 
-        if(this.x >= worldRightBound) {
+        if (this.x >= worldRightBound) {
             this.x = worldRightBound;
         }
 
@@ -241,8 +275,9 @@ public class EntityPlayer extends EntityBase {
         camera.update();
     }
 
+    @Override
     public boolean isDead() {
-        return this.isDead;
+        return this.healthPoints <= 0f;
     }
 
     @Override

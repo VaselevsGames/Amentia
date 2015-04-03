@@ -12,6 +12,10 @@ public class InputManager {
         return Gdx.input.isKeyPressed(key);
     }
 
+    private static boolean isMouseButtonPressed(int button) {
+        return Gdx.input.isButtonPressed(button);
+    }
+
     public static boolean isPressedLeft() {
         return isKeyPressed(Input.Keys.LEFT) || isKeyPressed(Input.Keys.A);
     }
@@ -30,6 +34,14 @@ public class InputManager {
 
     public static boolean isPressedEscape() {
         return isKeyPressed(Input.Keys.ESCAPE);
+    }
+
+    public static boolean isPressedLBM() {
+        return isMouseButtonPressed(Input.Buttons.LEFT);
+    }
+
+    public static boolean isPressedRMB() {
+        return isMouseButtonPressed(Input.Buttons.RIGHT);
     }
 
 }
