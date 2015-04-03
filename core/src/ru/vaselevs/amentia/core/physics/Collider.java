@@ -1,0 +1,64 @@
+package ru.vaselevs.amentia.core.physics;
+
+import com.badlogic.gdx.graphics.Camera;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector2;
+import ru.vaselevs.amentia.core.entity.EntityBase;
+
+import java.util.HashMap;
+import java.util.Map;
+
+/**
+ * Created by CoreX on 01.04.2015.
+ */
+public class Collider<T extends EntityBase> {
+
+    private T entity;
+
+    /*
+     * entity -> time
+     */
+    private Map<EntityBase, Float> collidedEntitiesMap;
+
+    private static final float COLLIDED_ENTITY_CAPTURE_TIME = 1f;
+
+    private ShapeRenderer shapeRenderer;
+
+    public Collider(T entity) {
+        this.entity = entity;
+        this.collidedEntitiesMap = new HashMap<>();
+        this.shapeRenderer = new ShapeRenderer();
+    }
+
+    public void renderDebug(Camera camera) {
+        this.shapeRenderer.setProjectionMatrix(camera.combined);
+        this.shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
+        shapeRenderer.setColor(0, 1, 0, 1);
+        Rectangle rect = this.getEntity().getBodyRectangle();
+        shapeRenderer.rect(rect.getX(), rect.getY(), rect.getWidth(), rect.getHeight());
+        this.shapeRenderer.end();
+    }
+
+    public void update(float deltaTime) {
+        // увеличиваем время хранения всех EntityBase объектов
+        this.collidedEntitiesMap.entrySet().forEach(entry -> entry.setValue(entry.getValue() + deltaTime));
+
+        // удаляем из map все объекты EntityBase, которые >= COLLIDED_ENTITY_CAPTURE_TIME
+        this.collidedEntitiesMap.entrySet().removeIf(entry -> entry.getValue() >= COLLIDED_ENTITY_CAPTURE_TIME);
+
+        this.getEntity().update(deltaTime);
+    }
+
+    public T getEntity() {
+        return this.entity;
+    }
+
+    public void collidedWith(Collider collider) {
+        if (!collidedEntitiesMap.containsKey(collider.getEntity())) {
+            collidedEntitiesMap.put(collider.getEntity(), 0f);
+            this.getEntity().collidedWith(collider.getEntity());
+        }
+    }
+
+}

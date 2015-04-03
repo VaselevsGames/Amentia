@@ -1,5 +1,6 @@
 package ru.vaselevs.amentia.core.enemy;
 
+import com.badlogic.gdx.math.Rectangle;
 import ru.vaselevs.amentia.core.animation.Animation;
 import ru.vaselevs.amentia.core.animation.AnimationManager;
 import ru.vaselevs.amentia.core.entity.EntityBase;
@@ -14,13 +15,14 @@ public class EntityEnemyDerelict extends EntityBase {
 
     private AnimationManager animationManager;
 
-    private float healthPoint;
+    private float healthPoints;
 
     public EntityEnemyDerelict(WorldBase world, float x, float y) {
         super(world, x, y);
         this.width = 101;
         this.height = 150;
-        this.healthPoint = 100f;
+        this.name = "EntityEnemyDerelict";
+        this.healthPoints = 100f;
 
         this.resourceDisposer = new ResourceDisposer();
         this.animationManager = new AnimationManager();
@@ -42,12 +44,28 @@ public class EntityEnemyDerelict extends EntityBase {
         this.x += -1 * 250f * deltaTime;
     }
 
-    @Override
-    public void damage(int hit) {
-        this.healthPoint -= hit;
-        if (this.healthPoint <= 0 ) {
+    private void damage(float hit) {
+        this.healthPoints -= hit;
+        if (this.healthPoints <= 0 ) {
             this.animationManager.play("death");
         }
+    }
+
+    @Override
+    public Rectangle getBodyRectangle() {
+        float boundsDecrease = 10f;
+        return new Rectangle(
+                this.x + boundsDecrease,
+                this.y + boundsDecrease,
+                this.width - 2 * boundsDecrease,
+                this.height - 2 * boundsDecrease
+        );
+    }
+
+    @Override
+    public void collidedWith(EntityBase entity) {
+        //System.out.println(this.name + " collided with " + entity.getName());
+        //damage(30f);
     }
 
     @Override

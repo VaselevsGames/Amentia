@@ -1,16 +1,17 @@
 package ru.vaselevs.amentia.core.world;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.collision.BoundingBox;
-import ru.vaselevs.amentia.core.renderer.WorldRendererBase;
+import com.badlogic.gdx.physics.box2d.World;
 import ru.vaselevs.amentia.core.resource.IDisposable;
 
 /**
  * Created by CoreX on 23.03.2015.
  */
-public class WorldBase implements IDisposable {
+public abstract class WorldBase implements IDisposable {
     private float width;
     private float height;
     private SpriteBatch batch;
@@ -54,16 +55,12 @@ public class WorldBase implements IDisposable {
     }
 
 
-    protected void render() {
+    protected abstract void render();
 
-    }
+    protected abstract void update(float deltaTime);
 
-    protected void update(float deltaTime) {
-
-    }
+    public abstract Camera getCamera();
 
     @Override
-    public void dispose() {
-
-    }
+    public abstract void dispose();
 }
