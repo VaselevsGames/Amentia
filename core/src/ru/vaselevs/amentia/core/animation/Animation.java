@@ -42,9 +42,15 @@ public class Animation implements IDisposable {
         this.markReplay = false;
     }
 
-    public void render(float x, float y, float width, float height, boolean flipX, boolean flipY) {
+    /*
+    	public void draw (Texture texture, float x, float y, float originX, float originY, float width, float height, float scaleX,
+		float scaleY, float rotation, int srcX, int srcY, int srcWidth, int srcHeight, boolean flipX, boolean flipY) {
+
+     */
+
+    public void render(float x, float y, float width, float height, boolean flipX, boolean flipY, float rotation, float origX, float origY) {
         int offsetX = currentFrame * frameWidth;
-        this.batch.draw(this.texture, x, y, width, height, offsetX, 0, this.frameWidth, this.frameHeight, flipX, flipY);
+        this.batch.draw(this.texture, x, y, origX, origY, width, height, 1f, 1f, rotation, offsetX, 0, this.frameWidth, this.frameHeight, flipX, flipY);
     }
 
     public void update(float deltaTime) {
@@ -122,5 +128,13 @@ public class Animation implements IDisposable {
 
     public boolean isRunning() {
         return this.isRunning;
+    }
+
+    public int getWidth() {
+        return this.frameWidth;
+    }
+
+    public int getHeight() {
+        return this.frameHeight;
     }
 }

@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.collision.BoundingBox;
+import ru.vaselevs.amentia.core.Enemy.EntityEnemyBoss;
 import ru.vaselevs.amentia.core.animation.Animation;
 import ru.vaselevs.amentia.core.animation.AnimationManager;
 import ru.vaselevs.amentia.core.entity.EntityBase;
@@ -138,11 +139,16 @@ public class EntityPlayer extends EntityBase {
     @Override
     public void collidedWith(EntityBase entity) {
         //System.out.println(this.name + " collided with " + entity.getName());
+
         if(!entity.isDead()) {
-            if (!(entity instanceof EntityShuriken)) {
-                damage(34f);
+            if  (!(entity instanceof EntityEnemyBoss)) {
+                damage(20f);
+            }
+            else if (!(entity instanceof EntityShuriken)) {
+                damage(1000f);
             }
         }
+
     }
 
     @Override

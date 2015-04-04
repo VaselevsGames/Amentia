@@ -31,7 +31,14 @@ public class AnimationManager implements IDisposable {
     public void render(float x, float y, float width, float height, boolean flipX, boolean flipY) {
         Animation animation = this.currentAnimation;
         if (animation != null) {
-            animation.render(x, y, width, height, flipX, flipY);
+            animation.render(x, y, width, height, flipX, flipY, 0f, 0f, 0f);
+        }
+    }
+
+    public void render(float x, float y, float width, float height, boolean flipX, boolean flipY, float rotation, float origX, float origY) {
+        Animation animation = this.currentAnimation;
+        if (animation != null) {
+            animation.render(x, y, width, height, flipX, flipY, rotation, origX, origY);
         }
     }
 
@@ -71,6 +78,22 @@ public class AnimationManager implements IDisposable {
         if (animation != null) {
             animation.reset();
         }
+    }
+
+    public int getWidth() {
+        Animation animation = this.currentAnimation;
+        if (animation != null) {
+            return animation.getWidth();
+        }
+        return 0;
+    }
+
+    public int getHeight() {
+        Animation animation = this.currentAnimation;
+        if (animation != null) {
+            return animation.getHeight();
+        }
+        return 0;
     }
 
     @Override

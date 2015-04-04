@@ -5,13 +5,13 @@ import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Matrix4;
+import ru.vaselevs.amentia.core.Enemy.EntityEnemyBoss;
 import ru.vaselevs.amentia.core.collision.CollisionManager;
 import ru.vaselevs.amentia.core.enemy.EntityEnemyCaterpillar;
 import ru.vaselevs.amentia.core.enemy.EntityEnemyDerelict;
 import ru.vaselevs.amentia.core.enemy.EntityEnemyHedgehog;
 import ru.vaselevs.amentia.core.entity.EntityBase;
 import ru.vaselevs.amentia.core.hud.HealthHUD;
-import ru.vaselevs.amentia.core.image.UserInterfaceImage;
 import ru.vaselevs.amentia.core.image.WorldBackgroundImage;
 import ru.vaselevs.amentia.core.input.InputManager;
 import ru.vaselevs.amentia.core.player.EntityPlayer;
@@ -129,9 +129,12 @@ public class WorldForest extends WorldBase {
         this.spawnEntity(new EntityEnemyDerelict(this, 1500, 50));
         this.spawnEntity(new EntityEnemyHedgehog(this, 8000, 50));
 
-        for (int i = 1; i < 5; ++i) {
-            this.spawnEntity(new EntityEnemyCaterpillar(this, i * 1000, 50));
+        for (int i = 1; i < 15; ++i) {
+            this.spawnEntity(new EntityEnemyCaterpillar(this, i * 1250, 50));
+            this.spawnEntity(new EntityEnemyBoss(this, i * 1000, 100));
         }
+
+        this.spawnEntity(new EntityEnemyBoss(this, 1000, 100));
     }
 
     @Override
@@ -153,12 +156,12 @@ public class WorldForest extends WorldBase {
 
     @Override
     public void update(float deltaTime) {
-        if(InputManager.isPressedEscape()) {
+        if (InputManager.isPressedEscape()) {
             this.getStageManager().popStage();
             //return;
         }
 
-        if(InputManager.isPressedRestart()) {
+        if (InputManager.isPressedRestart()) {
             this.getStageManager().replaceCurrentStage(new StageWorld(this.getStageManager()));
             //return;
         }

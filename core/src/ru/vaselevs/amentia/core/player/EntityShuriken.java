@@ -16,6 +16,7 @@ public class EntityShuriken extends EntityBase {
     private AnimationManager animationManager;
 
     private int direction;
+    private float rotation;
 
     public EntityShuriken(WorldBase world, float x, float y, int direction) {
         super(world, x, y);
@@ -27,6 +28,7 @@ public class EntityShuriken extends EntityBase {
         this.initializeAnimation();
 
         this.direction = direction;
+        this.rotation = 0f;
     }
 
     private void initializeAnimation() {
@@ -35,12 +37,23 @@ public class EntityShuriken extends EntityBase {
 
         SpriteBatch batch = this.getWorld().getBatch();
 
-        this.animationManager.add("default", new Animation("object/Attack_2x1.png", batch, 2, 0.25f, true));
+        this.animationManager.add("default", new Animation("object/Attack_2x1.png", batch, 2, 0f, false));
     }
 
     @Override
     public void render() {
-        this.animationManager.render(this.x, this.y, this.width, this.height, false, false);
+        float angle = (float) Math.toDegrees(this.rotation);
+        this.animationManager.render(
+                this.x,
+                this.y,
+                this.width,
+                this.height,
+                false,
+                false,
+                angle,
+                this.animationManager.getWidth() / 2,
+                this.animationManager.getHeight() / 2
+        );
     }
 
     @Override
@@ -53,11 +66,15 @@ public class EntityShuriken extends EntityBase {
         this.animationManager.play("default");
         this.animationManager.update(deltaTime);
         this.x += direction * 15f;
+
+
+        this.rotation += 1f;
+
     }
 
     @Override
     public Rectangle getBodyRectangle() {
-        return new Rectangle(this.x, this.y, this.width, this.height);
+        return new Rectangle(this.x+10f, this.y+10f, this.width-20f, this.height-20f);
     }
 
     @Override
