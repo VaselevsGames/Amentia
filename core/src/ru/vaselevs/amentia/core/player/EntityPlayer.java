@@ -4,7 +4,7 @@ import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.collision.BoundingBox;
-import ru.vaselevs.amentia.core.Enemy.EntityEnemyBoss;
+import ru.vaselevs.amentia.core.enemy.EntityEnemyBoss;
 import ru.vaselevs.amentia.core.animation.Animation;
 import ru.vaselevs.amentia.core.animation.AnimationManager;
 import ru.vaselevs.amentia.core.entity.EntityBase;

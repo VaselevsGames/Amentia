@@ -5,7 +5,7 @@ import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Matrix4;
-import ru.vaselevs.amentia.core.Enemy.EntityEnemyBoss;
+import ru.vaselevs.amentia.core.enemy.EntityEnemyBoss;
 import ru.vaselevs.amentia.core.collision.CollisionManager;
 import ru.vaselevs.amentia.core.enemy.EntityEnemyCaterpillar;
 import ru.vaselevs.amentia.core.enemy.EntityEnemyDerelict;

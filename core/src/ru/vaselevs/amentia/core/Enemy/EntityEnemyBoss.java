@@ -1,4 +1,4 @@
-package ru.vaselevs.amentia.core.Enemy;
+package ru.vaselevs.amentia.core.enemy;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
