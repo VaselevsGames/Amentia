@@ -3,4 +3,5 @@
 #Version: 0.3.6
 
 #Team: VaselevsGames
-Members: DarkoreXOR, MorozovArtem, NstTaInt
+
+#Members: DarkoreXOR, MorozovArtem, NstTaInt
